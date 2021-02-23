@@ -14,10 +14,6 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 DATABASE_URL = "postgresql://fastapi_users_crud_user:123456@localhost:5432/fastapi_users_crud_db"
 database = databases.Database(DATABASE_URL)
 metadata = sqlalchemy.MetaData()
-engin = sqlalchemy.create_engine(
-    DATABASE_URL
-)
-metadata.create_all(engin)
 
 # Models Database
 users = sqlalchemy.Table(
@@ -33,8 +29,14 @@ users = sqlalchemy.Table(
     sqlalchemy.Column("status",     sqlalchemy.CHAR),
 )
 
+engin = sqlalchemy.create_engine(
+    DATABASE_URL
+)
+metadata.create_all(engin)
 
 # Schemas (Models Pydantic)
+
+
 class UserList(BaseModel):
     id:         str
     username:   str
